@@ -207,29 +207,33 @@ $(document).ready(function () {
     $('#add-to-cal').html(myCalendar);
 
 
-    /********************** RSVP **********************/
-    $('#rsvp-form').on('submit', function (e) {
-        e.preventDefault();
-        var data = $(this).serialize();
+   /********************** RSVP **********************/
+   $('#rsvp-form').on('submit', function (e) {
+       e.preventDefault();
+       var data = $(this).serialize();
 
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+       $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
 
-        if (MD5($('#invite_code').val()) !== 'e4a19a9b2cbcb5483d69748d3a9b6ab2' )//&& MD5($('#invite_code').val()) !== 'e4a19a9b2cbcb5483d69748d3a9b6ab2')
-             {
-            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
-        } else {
-            $.post('https://script.google.com/macros/s/AKfycbzUqz44wOat0DiGjRV1gUnRf4HRqlRARWggjvHKWvqniP7eVDG-/exec', data)
-                .done(function (data) {
-                    console.log(data);
-                    $('#alert-wrapper').html('');
-                    $('#rsvp-modal').modal('show');
-                })
-                .fail(function (data) {
-                    console.log(data);
-                    $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
-                });
-        }
-    });
+       if (MD5($('#invite_code').val()) != 'e4a19a9b2cbcb5483d69748d3a9b6ab2') {
+           console.log(D5($('#invite_code').val()));
+           $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+       } else {
+           var url = 'https://script.google.com/macros/s/AKfycbxF5f0k92sAO2pCNL_7K_i2p36X3SYk65eY1ulm0apyP4M2loo/exec';
+           var jqxhr = $.ajax({
+               url: url,
+               method: "GET",
+               dataType: "json",
+               data: data
+           }).done(function (data) {
+               console.log(data);
+               $('#alert-wrapper').html('');
+               $('#rsvp-modal').modal('show');
+           }).fail(function (data) {
+                   console.log(data);
+                   $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+               });
+       }
+   });
 
 });
 
