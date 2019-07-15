@@ -5,48 +5,48 @@ $(document).ready(function () {
     $('.wp1').waypoint(function () {
         $('.wp1').addClass('animated fadeInLeft');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
     $('.wp2').waypoint(function () {
         $('.wp2').addClass('animated fadeInRight');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
     $('.wp3').waypoint(function () {
         $('.wp3').addClass('animated fadeInLeft');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
     $('.wp4').waypoint(function () {
         $('.wp4').addClass('animated fadeInRight');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
     $('.wp5').waypoint(function () {
         $('.wp5').addClass('animated fadeInLeft');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
     $('.wp6').waypoint(function () {
         $('.wp6').addClass('animated fadeInRight');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
     $('.wp7').waypoint(function () {
         $('.wp7').addClass('animated fadeInUp');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
     $('.wp8').waypoint(function () {
         $('.wp8').addClass('animated fadeInLeft');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
     $('.wp9').waypoint(function () {
         $('.wp9').addClass('animated fadeInRight');
     }, {
-        offset: '75%'
-    });
+            offset: '75%'
+        });
 
     /***************** Initiate Flexslider ******************/
     $('.flexslider').flexslider({
@@ -214,17 +214,21 @@ $(document).ready(function () {
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
 
-        if (MD5($('#invite_code').val()) !== 'e4a19a9b2cbcb5483d69748d3a9b6ab2' )//&& MD5($('#invite_code').val()) !== 'e4a19a9b2cbcb5483d69748d3a9b6ab2')
-             {
+        if (MD5($('#invite_code').val()) != 'e4a19a9b2cbcb5483d69748d3a9b6ab2') {
+            console.log(D5($('#invite_code').val()));
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
         } else {
-            $.post('https://script.google.com/macros/s/AKfycbzUqz44wOat0DiGjRV1gUnRf4HRqlRARWggjvHKWvqniP7eVDG-/exec', data)
-                .done(function (data) {
-                    console.log(data);
-                    $('#alert-wrapper').html('');
-                    $('#rsvp-modal').modal('show');
-                })
-                .fail(function (data) {
+            var url = 'https://script.google.com/macros/s/AKfycbxF5f0k92sAO2pCNL_7K_i2p36X3SYk65eY1ulm0apyP4M2loo/exec';
+            var jqxhr = $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json",
+                data: data
+            }).done(function (data) {
+                console.log(data);
+                $('#alert-wrapper').html('');
+                $('#rsvp-modal').modal('show');
+            }).fail(function (data) {
                     console.log(data);
                     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
                 });
@@ -237,7 +241,7 @@ $(document).ready(function () {
 
 // Google map
 function initMap() {
-    var itc_kol = {lat: 22.5932759, lng: 88.27027720000001};
+    var itc_kol = { lat: 6.506387, lng: 3.3272795 };
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 15,
         center: itc_kol,
@@ -251,7 +255,7 @@ function initMap() {
 }
 
 function initBBSRMap() {//6.506387,3.3272795
-    var la_fiesta = {lat: 6.506387, lng: 3.3272795};
+    var la_fiesta = { lat: 6.506387, lng: 3.3272795 };
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 15,
         center: la_fiesta,
